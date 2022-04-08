@@ -26,5 +26,5 @@ jobs:
     - name: Build
       run: dotnet build $SOLUTION --configuration $BUILD_CONFIG --no-restore
     - name: Publish
-      run: nuget push **\*.nupkg -Source 'https://api.nuget.org/v3/index.json' -ApiKey ${{secrets.NUGET_API_KEY}} --skip-duplicate
+      run: nuget push **\*.nupkg -Source 'https://api.nuget.org/v3/index.json' --skip-duplicate -ApiKey ${{secrets.NUGET_API_KEY}}
 
