@@ -9,7 +9,7 @@
     <Authors>ThomasBernard</Authors>
     <PackageId>ThomasBernard.CsharpTools</PackageId>
     <Description>Ce projet à été mis en place afin de créer des composants C# réutilisables sur plusieurs projets.</Description>
-    <Version>1.2.0.1</Version>
+    <Version>1.2.0.2</Version>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
   </PropertyGroup>
 
