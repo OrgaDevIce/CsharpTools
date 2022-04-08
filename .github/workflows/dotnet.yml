@@ -1,4 +1,4 @@
-name: .NET
+name: CI
 
 on:
   push:
@@ -8,7 +8,11 @@ on:
 
 jobs:
   build:
-
+  
+    env:
+      BUILD_CONFIG: 'Release'
+      SOLUTION: 'CsharpTools.sln'
+      
     runs-on: ubuntu-latest
 
     steps:
@@ -20,7 +24,6 @@ jobs:
     - name: Restore dependencies
       run: dotnet restore
     - name: Build
-      run: dotnet build --no-restore
+      run: dotnet build $SOLUTION --configuration $BUILD_CONFIG --no-restore
     - name: Test
-      run: dotnet test --no-build --verbosity normal
-      working-directory: ../../CsharpTools
+      run: dotnet test /p:Configuration=$env:BUILD_CONFIG --no-restore --no-build --verbosity normal
