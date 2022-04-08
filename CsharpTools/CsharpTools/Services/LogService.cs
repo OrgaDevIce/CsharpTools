@@ -5,76 +5,48 @@ namespace CsharpTools.Services
 {
     public class LogService : ILogService
     {
-        private readonly string _directoryPath;
-        private string _formattedDate => DateTime.Now.ToString("HH:mm:ss");
         private string _currentLogFileName => $"Logs_{DateTime.Now.ToString("dd-MM")}.log";
+        private string _currentLogFileFullPath => $"{DirectoryPath}\\{_currentLogFileName}";
+        private string _formattedDate => DateTime.Now.ToString("HH:mm:ss");
 
-        public LogService(string directoryPath)
+
+        public string DirectoryPath { get; set; }
+
+        public LogService()
         {
-            _directoryPath = directoryPath;
+            DirectoryPath = Directory.GetCurrentDirectory();
+
+            var directory = new DirectoryInfo(DirectoryPath);
+
+            if (!directory.Exists)
+            {
+                Directory.CreateDirectory(DirectoryPath);
+            }
         }
 
-        public void Error(Exception exception, [CallerMemberName] string caller = "")
+        public void Error(Exception exception, [CallerFilePath] string file = "", [CallerMemberName] string method = "", [CallerLineNumber] int line = 0)
         {
-            Write(exception.Message, LogType.Error, caller);
+            Write(exception.Message, LogType.Error, file, method, line);
         }
 
-        public void Info(string message, [CallerMemberName] string caller = "")
+        public void Info(string message, [CallerFilePath] string file = "", [CallerMemberName] string method = "", [CallerLineNumber] int line = 0)
         {
-            Write(message, LogType.Info, caller);
+            Write(message, LogType.Info, file, method, line);
         }
 
-        private void Write(string log, LogType logType, string caller)
+        private void Write(string log, LogType logType, string file, string method, int line)
         {
             try
             {
-                var logFileFullPath = CheckFile();
+                var formattedLog = $"{_formattedDate} | {logType} | {file}/{method} ({line}) | {log} \n";
 
-                var formattedLog = $"{_formattedDate} | {logType} | {caller} | {log} \n";
-
-
-                switch (logType)
-                {
-                    case LogType.Error:
-                        Console.ForegroundColor = ConsoleColor.Red;
-                        break;
-                    case LogType.Info:
-                        Console.ForegroundColor = ConsoleColor.Cyan;
-                        break;
-                    default:
-                        break;
-                }
-                Console.WriteLine(formattedLog);
                 Console.ForegroundColor = ConsoleColor.White;
-                File.AppendAllText(logFileFullPath, formattedLog);
+                File.AppendAllText(_currentLogFileFullPath, formattedLog);
             }
             catch (Exception exception)
             {
                 Console.WriteLine(exception);
             }
-        }
-
-        /// <summary>
-        /// Check if directory and log file exist, else create it
-        /// </summary>
-        /// <returns></returns>
-        private string CheckFile()
-        {
-            var directory = new DirectoryInfo(_directoryPath);
-
-            // If the directory does not exist we create one 
-            if (!directory.Exists)
-            {
-                Directory.CreateDirectory(_directoryPath);
-            }
-
-            // Check if one file already exist
-
-            // Else create one 
-
-            // Return full path of this file
-
-            return $"{_directoryPath}\\{_currentLogFileName}";
         }
 
         enum LogType
