@@ -9,19 +9,24 @@ namespace CsharpTools.Services
         private string _currentLogFileFullPath => $"{DirectoryPath}\\{_currentLogFileName}";
         private string _formattedDate => DateTime.Now.ToString("HH:mm:ss");
 
-
-        public string DirectoryPath { get; set; }
+        private string _directoryPath;
+        public string DirectoryPath
+        {
+            get { return _directoryPath; }
+            set
+            {
+                var directory = new DirectoryInfo(value);
+                if (!directory.Exists)
+                {
+                    Directory.CreateDirectory(value);
+                }
+                _directoryPath = value;
+            }
+        }
 
         public LogService()
         {
             DirectoryPath = Directory.GetCurrentDirectory();
-
-            var directory = new DirectoryInfo(DirectoryPath);
-
-            if (!directory.Exists)
-            {
-                Directory.CreateDirectory(DirectoryPath);
-            }
         }
 
         public void Error(Exception exception, [CallerFilePath] string file = "", [CallerMemberName] string method = "", [CallerLineNumber] int line = 0)
@@ -40,7 +45,6 @@ namespace CsharpTools.Services
             {
                 var formattedLog = $"{_formattedDate} | {logType} | {file}/{method} ({line}) | {log} \n";
 
-                Console.ForegroundColor = ConsoleColor.White;
                 File.AppendAllText(_currentLogFileFullPath, formattedLog);
             }
             catch (Exception exception)
