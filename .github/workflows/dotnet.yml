@@ -11,7 +11,7 @@ jobs:
   
     env:
       BUILD_CONFIG: 'Release'
-      SOLUTION: 'CsharpTools.sln'
+      SOLUTION: './CsharpTools/CsharpTools.sln'
       
     runs-on: ubuntu-latest
 
