@@ -24,21 +24,21 @@ namespace CsharpTools.Services
             }
         }
 
-        public void Error(Exception exception, [CallerMemberName] string caller = "")
+        public void Error(Exception exception, [CallerFilePath] string file = "", [CallerMemberName] string method = "", [CallerLineNumber] int line = 0)
         {
-            Write(exception.Message, LogType.Error, caller);
+            Write(exception.Message, LogType.Error, file, method, line);
         }
 
-        public void Info(string message, [CallerMemberName] string caller = "")
+        public void Info(string message, [CallerFilePath] string file = "", [CallerMemberName] string method = "", [CallerLineNumber] int line = 0)
         {
-            Write(message, LogType.Info, caller);
+            Write(message, LogType.Info, file, method, line);
         }
 
-        private void Write(string log, LogType logType, string caller)
+        private void Write(string log, LogType logType, string file, string method, int line)
         {
             try
             {
-                var formattedLog = $"{_formattedDate} | {logType} | {caller} | {log} \n";
+                var formattedLog = $"{_formattedDate} | {logType} | {file}/{method} ({line}) | {log} \n";
 
                 Console.ForegroundColor = ConsoleColor.White;
                 File.AppendAllText(_currentLogFileFullPath, formattedLog);
