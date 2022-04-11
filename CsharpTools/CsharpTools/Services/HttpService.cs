@@ -21,7 +21,43 @@ namespace CsharpTools.Services
 
             try
             {
-                // If the bearer token is not "" we add it in the request header
+                var response = await SendRequest(url, httpMethod, body, bearer);
+
+                httpResult = new HttpResult<T>(response);
+
+                if (response.IsSuccessStatusCode)
+                    httpResult.Content = JsonConvert.DeserializeObject<T>(await response.Content.ReadAsStringAsync());
+            }
+            catch (Exception exception)
+            {
+                Console.WriteLine(exception);
+                httpResult.ErrorMessage = exception.Message;
+            }
+            return httpResult;
+        }
+
+        public async Task<HttpResult> SendHttpRequest(string url, HttpMethod httpMethod, object body = null, string bearer = "")
+        {
+            var httpResult = new HttpResult();
+
+            try
+            {
+                var response = await SendRequest(url, httpMethod, body, bearer);
+                
+                httpResult = new HttpResult(response);
+            }
+            catch (Exception exception)
+            {
+                Console.WriteLine(exception);
+                httpResult.ErrorMessage = exception.Message;
+            }
+            return httpResult;
+        }
+
+        private async Task<HttpResponseMessage> SendRequest(string url, HttpMethod httpMethod, object body = null, string bearer = "")
+        {
+            try
+            {
                 if (!string.IsNullOrEmpty(bearer))
                     _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", bearer);
 
@@ -32,24 +68,15 @@ namespace CsharpTools.Services
                 if (body != null)
                     httpRequestMessage.Content = JsonContent.Create(body);
 
-                var httpResponse = await _httpClient.SendAsync(httpRequestMessage);
+                var response = await _httpClient.SendAsync(httpRequestMessage);
 
-                httpResult = new HttpResult<T>(httpResponse);
-
-                if (httpResponse.IsSuccessStatusCode)
-                    httpResult.Content = JsonConvert.DeserializeObject<T>(await httpResponse.Content.ReadAsStringAsync());
+                return response;
             }
             catch (Exception exception)
             {
                 Console.WriteLine(exception);
-                httpResult.ErrorMessage = exception.Message;
+                return null;
             }
-            return httpResult;
-        }
-
-        public Task<HttpResult> SendHttpRequest(string url, HttpMethod httpMethod, object body = null, string bearer = "")
-        {
-            throw new NotImplementedException();
         }
     }
 }
