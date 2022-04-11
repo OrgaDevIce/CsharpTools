@@ -27,7 +27,7 @@ Cette méthode nous retourne donc un objet HttpResult contenant plusieurs propri
 ```C#
 IHttpService httpService = new HttpService(); // New instance of HttpService
 
-await httpService.SendHttpRequest(url, HttpMethod.Post); // Send post method without body recuperation
-await httpService.SendHttpRequest<ColorDTODown>(url, HttpMethod.Get); // Send get method and get the content of the request
+HttpResult result = await httpService.SendHttpRequest(url, HttpMethod.Post, body); // Send post method without body recuperation
+HttpResult<ColorDTODown> result = await httpService.SendHttpRequest<ColorDTODown>(url, HttpMethod.Get); // Send get method and get the content of the request
 ```
 
