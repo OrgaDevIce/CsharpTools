@@ -22,3 +22,12 @@ Dans la plupart de nos projets nous avons besoin de réaliser différents call H
   - bearer (string) => Une chaine de charactères contenant notre bearer token.
 
 Cette méthode nous retourne donc un objet HttpResult contenant plusieurs propriétés. Si lors de l'exécution de la méthode, celle ci à crash, on pourra retrouver le message d'erreur dans ErrorMessage. On retrouve le HttpStatusCode dans Status et toutes les informations de notre requète dans RequestMessage. Finalement nous pourront lire la réponse de notre requète dans Content.
+
+### Utilisation
+```C#
+IHttpService httpService = new HttpService(); // New instance of HttpService
+
+await httpService.SendHttpRequest(url, HttpMethod.Post); // Send post method without body recuperation
+await httpService.SendHttpRequest<ColorDTODown>(url, HttpMethod.Get); // Send get method and get the content of the request
+```
+
