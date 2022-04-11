@@ -39,7 +39,16 @@ Toutes les applications devraient avoir des logs, cela permet d'identifier et de
   - Error
   - (Des méthodes pourront être ajoutées dans les futures versions)
 
-Le fichier de log porte comme nom le schéma suivant : ```log Logs_{Day}-{Month}.log ```
+Le fichier de log porte comme nom le schéma suivant : ```Logs_{Day}-{Month}.log ```
 
 Info prend un seul paramètre, le message à afficher dans le fichier de log.
+``` 09:48:58 | Info | C:\Users\Thomas\Desktop\testLogs\testLogs\MainPage.xaml.cs/OnCounterClicked (19) | Button clicked ```
+Voici un exemple de ce qui est logué avec une Info.
+
+Error prend en paramètre une Exception.
+``` 09:55:12 | Error | C:\Users\Thomas\Desktop\testLogs\testLogs\MainPage.xaml.cs/OnCounterClicked (20) | This is an error ```
+Voici un exemple de ce qui est logué avec une Error.
+
+
+
 
