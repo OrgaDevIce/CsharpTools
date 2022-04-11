@@ -42,12 +42,27 @@ Toutes les applications devraient avoir des logs, cela permet d'identifier et de
 Le fichier de log porte comme nom le schéma suivant : ```Logs_{Day}-{Month}.log ```
 
 Info prend un seul paramètre, le message à afficher dans le fichier de log.
+
 ``` 09:48:58 | Info | C:\Users\Thomas\Desktop\testLogs\testLogs\MainPage.xaml.cs/OnCounterClicked (19) | Button clicked ```
+
 Voici un exemple de ce qui est logué avec une Info.
 
 Error prend en paramètre une Exception.
+
 ``` 09:55:12 | Error | C:\Users\Thomas\Desktop\testLogs\testLogs\MainPage.xaml.cs/OnCounterClicked (20) | This is an error ```
+
 Voici un exemple de ce qui est logué avec une Error.
+
+### Utilisation
+
+```C#
+ILogService logService = new LogService(); // New instance of our service
+logService.DirectoryPath = @"C:\logs"; // Set the path of logs folder
+
+logService.Info("Button clicked"); // Create a new Info
+logService.Error(new Exception("This is an error")); // Create a new Error
+```
+
 
 
 
