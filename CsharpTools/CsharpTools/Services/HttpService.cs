@@ -38,16 +38,18 @@ namespace CsharpTools.Services
 
                 if (httpResponse.IsSuccessStatusCode)
                     httpResult.Content = JsonConvert.DeserializeObject<T>(await httpResponse.Content.ReadAsStringAsync());
-
-                return httpResult;
             }
             catch (Exception exception)
             {
                 Console.WriteLine(exception);
                 httpResult.ErrorMessage = exception.Message;
-
-                return httpResult;
             }
+            return httpResult;
+        }
+
+        public Task<HttpResult> SendHttpRequest(string url, HttpMethod httpMethod, object body = null, string bearer = "")
+        {
+            throw new NotImplementedException();
         }
     }
 }
