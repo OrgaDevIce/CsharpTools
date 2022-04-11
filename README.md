@@ -31,3 +31,15 @@ HttpResult result = await httpService.SendHttpRequest(url, HttpMethod.Post, body
 HttpResult<ColorDTODown> result = await httpService.SendHttpRequest<ColorDTODown>(url, HttpMethod.Get); // Send get method and get the content of the request
 ```
 
+
+## LogService
+
+Toutes les applications devraient avoir des logs, cela permet d'identifier et de résoudre un problème plus rapidement. LogService permet de créer un fichier de log quotidien à l'emplacement souhaité par l'utilisateur. LogService contient deux méthodes et une propriété. La propriété DirectoryPath permet de choisir le chemin des logs. Par défaut ces logs sont créés à la racine de l'application. Ensuite pour écrire dans les fichiers de logs on utilise deux méthodes : 
+  - Info 
+  - Error
+  - (Des méthodes pourront être ajoutées dans les futures versions)
+
+Le fichier de log porte comme nom le schéma suivant : ```log Logs_{Day}-{Month}.log ```
+
+Info prend un seul paramètre, le message à afficher dans le fichier de log.
+
