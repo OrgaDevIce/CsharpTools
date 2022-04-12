@@ -24,5 +24,10 @@ namespace CsharpTools.Services.Interfaces
         /// <param name="bearer">The bearer token</param>
         /// <returns>This method returns an HttpResult, containing information about the request and the result</returns>
         Task<HttpResult> SendHttpRequest(string url, HttpMethod httpMethod, object body = null, string bearer = "");
+
+        /// <summary>
+        /// Set the base url, this url will be added before each calls
+        /// </summary>
+        string BaseUrl { get; set; }
     }
 }
