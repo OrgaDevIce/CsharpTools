@@ -36,7 +36,32 @@ HttpResult result = await httpService.SendHttpRequest(url, HttpMethod.Post, body
 HttpResult<ColorDTODown> result = await httpService.SendHttpRequest<ColorDTODown>(url, HttpMethod.Get); // Send get method and get the content of the request
 ```
 
+### Résultats
 
+Il y a deux type de résultats pour cette méthode, HttpResult et HttpResult<T>. HttpResult est construit de la manière suivante :
+  
+```C#
+    public class HttpResult
+    {
+        public string ErrorMessage { get; set; }
+        public HttpStatusCode Status { get; set; }
+        public HttpRequestMessage RequestMessage { get; set; }
+    }
+```
+
+HttpResult<T> hérite de cette classe et possède uniquement une propriété en plus : Content
+  
+```C#
+    public class HttpResult
+    {
+        public string ErrorMessage { get; set; }
+        public HttpStatusCode Status { get; set; }
+        public HttpRequestMessage RequestMessage { get; set; }
+        public T Content { get; set; }
+    }
+```
+
+  
 ## LogService
 
 Toutes les applications devraient avoir des logs, cela permet d'identifier et de résoudre un problème plus rapidement. LogService permet de créer un fichier de log quotidien à l'emplacement souhaité par l'utilisateur. LogService contient deux méthodes et une propriété. La propriété DirectoryPath permet de choisir le chemin des logs. Par défaut ces logs sont créés à la racine de l'application. Ensuite pour écrire dans les fichiers de logs on utilise deux méthodes : 
