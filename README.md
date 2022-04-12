@@ -52,7 +52,7 @@ Il y a deux type de résultats pour cette méthode, HttpResult et HttpResult<T>.
 HttpResult<T> hérite de cette classe et possède uniquement une propriété en plus : Content
   
 ```C#
-    public class HttpResult
+    public class HttpResult<T>
     {
         public string ErrorMessage { get; set; }
         public HttpStatusCode Status { get; set; }
@@ -60,6 +60,8 @@ HttpResult<T> hérite de cette classe et possède uniquement une propriété en 
         public T Content { get; set; }
     }
 ```
+
+Dans ErrorMessage, on retrouvera le message de l'erreur qui aura été levée en cas de problème. Status contient le status http (404 NotFound...) et RequestMessage contiendra toutes les informations concerant notre requète. Si nous utilisons HttpResult<T> alors le résultat JSON de la requète sera stocké dans Content.
 
   
 ## LogService
