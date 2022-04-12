@@ -77,7 +77,7 @@ Le fichier de log porte comme nom le schéma suivant : ```Logs_{Day}-{Month}.log
 
 Info prend un seul paramètre, le message à afficher dans le fichier de log.
 
-``` 09:48:58 | Info | MainPage.xaml.cs\OnCounterClicked (19) | Button clicked ```
+``` 09:48:58 | Info | MainPage.xaml.cs\OnCounterClicked (line n°33) | Button clicked ```
 
 *Voici un exemple de ce qui est logué avec une Info.*
 
