@@ -43,7 +43,9 @@ namespace CsharpTools.Services
         {
             try
             {
-                var formattedLog = $"{_formattedDate} | {logType} | {file}/{method} ({line}) | {log} \n";
+                // remove entire path of file name
+                var fileName = file.Split("\\").LastOrDefault();
+                var formattedLog = $"{_formattedDate} | {logType} | {fileName}\\{method} (line n°{line}) | {log} \n";
 
                 File.AppendAllText(_currentLogFileFullPath, formattedLog);
             }
