@@ -28,6 +28,12 @@ Dans la plupart de nos projets nous avons besoin de réaliser différents call H
 
 Cette méthode nous retourne donc un objet HttpResult contenant plusieurs propriétés. Si lors de l'exécution de la méthode, celle ci à crash, on pourra retrouver le message d'erreur dans ErrorMessage. On retrouve le HttpStatusCode dans Status et toutes les informations de notre requète dans RequestMessage. Finalement nous pourront lire la réponse de notre requète dans Content.
 
+Vous pouvez utiliser la propriété BaseUrl pour définir un url qui sera appelé avant chaque call Http
+```C#
+IHttpService httpService = new HttpService();
+httpService.BaseUrl = "https://myApiLink/";
+```
+
 ### Utilisation
 ```C#
 IHttpService httpService = new HttpService(); // New instance of HttpService
