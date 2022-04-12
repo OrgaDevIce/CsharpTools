@@ -10,6 +10,8 @@ namespace CsharpTools.Services
     {
         private readonly HttpClient _httpClient;
 
+        public string BaseUrl { get; set; }
+
         public HttpService()
         {
             _httpClient = new HttpClient();
@@ -62,7 +64,7 @@ namespace CsharpTools.Services
                     _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", bearer);
 
                 // Set the httpMethod and the url
-                var httpRequestMessage = new HttpRequestMessage() { Method = httpMethod, RequestUri = new Uri(url) };
+                var httpRequestMessage = new HttpRequestMessage() { Method = httpMethod, RequestUri = new Uri($"{BaseUrl}{url}") };
 
                 // If the body is not null we add it in the request content
                 if (body != null)
