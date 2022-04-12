@@ -31,14 +31,16 @@ Cette méthode nous retourne donc un objet HttpResult contenant plusieurs propri
 ### Utilisation
 ```C#
 IHttpService httpService = new HttpService(); // New instance of HttpService
+// Send post method without body recuperation
+HttpResult result = await httpService.SendHttpRequest(url, HttpMethod.Post, body); 
 
-HttpResult result = await httpService.SendHttpRequest(url, HttpMethod.Post, body); // Send post method without body recuperation
-HttpResult<ColorDTODown> result = await httpService.SendHttpRequest<ColorDTODown>(url, HttpMethod.Get); // Send get method and get the content of the request
+// Send get method and get the content of the request
+HttpResult<ColorDTODown> result = await httpService.SendHttpRequest<ColorDTODown>(url, HttpMethod.Get); 
 ```
 
 ### Résultats
 
-Il y a deux type de résultats pour cette méthode, HttpResult et HttpResult<T>. HttpResult est construit de la manière suivante :
+Il y a **deux type de résultats** pour cette méthode, HttpResult et HttpResult<T>. HttpResult est construit de la manière suivante :
   
 ```C#
     public class HttpResult
@@ -77,13 +79,13 @@ Info prend un seul paramètre, le message à afficher dans le fichier de log.
 
 ``` 09:48:58 | Info | C:\Users\Thomas\Desktop\testLogs\testLogs\MainPage.xaml.cs/OnCounterClicked (19) | Button clicked ```
 
-Voici un exemple de ce qui est logué avec une Info.
+*Voici un exemple de ce qui est logué avec une Info.*
 
 Error prend en paramètre une Exception.
 
 ``` 09:55:12 | Error | C:\Users\Thomas\Desktop\testLogs\testLogs\MainPage.xaml.cs/OnCounterClicked (20) | This is an error ```
 
-Voici un exemple de ce qui est logué avec une Error.
+*Voici un exemple de ce qui est logué avec une Error.*
 
 ### Utilisation
 
