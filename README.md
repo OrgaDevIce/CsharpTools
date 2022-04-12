@@ -1,6 +1,6 @@
 # C# Components
 
-[![forthebadge](https://img.shields.io/nuget/v/ThomasBernard.CsharpTools?style=plastic)](https://www.nuget.org/packages/ThomasBernard.CsharpTools/)
+[![forthebadge](https://img.shields.io/nuget/v/ThomasBernard.CsharpTools)](https://www.nuget.org/packages/ThomasBernard.CsharpTools/)
 [![forthebadge](https://img.shields.io/nuget/dt/ThomasBernard.CsharpTools)](https://www.nuget.org/packages/ThomasBernard.CsharpTools/)
 [![forthebadge](https://img.shields.io/github/languages/code-size/DevIceCorp/CsharpTools)](https://www.nuget.org/packages/ThomasBernard.CsharpTools/)
 
