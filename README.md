@@ -8,14 +8,13 @@
 [![forthebadge](https://forthebadge.com/images/badges/built-with-love.svg)](https://forthebadge.com)
 [![forthebadge](https://forthebadge.com/images/badges/made-with-c-sharp.svg)](https://forthebadge.com)
 
-## Pour commencer
+## Description
 
-Ce projet à été mis en place afin de créer des composants C# réutilisables sur plusieurs projets.
+This package provides C# reusable components.
 
-Voici une liste des différents services disponibles :
+Here is an example of the different provided services :
   - HttpService
   - CsvService
-
 
 ## HttpService
 
