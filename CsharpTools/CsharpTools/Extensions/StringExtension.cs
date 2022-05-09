@@ -1,4 +1,4 @@
-﻿namespace CsharpTools.Models
+﻿namespace CsharpTools.Models.Extensions
 {
     public static class StringExtension
     {
