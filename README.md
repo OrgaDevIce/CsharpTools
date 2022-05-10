@@ -5,10 +5,6 @@
 [![forthebadge](https://img.shields.io/github/languages/code-size/DevIceCorp/CsharpTools)](https://www.nuget.org/packages/ThomasBernard.CsharpTools/)
 [![CI/CD-Package-CsharpTools](https://github.com/DevIceCorp/CsharpTools/actions/workflows/dotnet.yml/badge.svg)](https://github.com/DevIceCorp/CsharpTools/actions/workflows/dotnet.yml)
 
-
-[![forthebadge](https://forthebadge.com/images/badges/built-with-love.svg)](https://forthebadge.com)
-[![forthebadge](https://forthebadge.com/images/badges/made-with-c-sharp.svg)](https://forthebadge.com)
-
 ## Pour commencer
 
 Ce projet à été mis en place afin de créer des composants C# réutilisables sur plusieurs projets.
@@ -24,24 +20,13 @@ Voici une liste des différentes fonctionnalitées disponibles :
 
 ## HttpService
 
-Dans la plupart de nos projets nous avons besoin de réaliser différents call Http, généralement pour communiquer avec des API. Ce service permet de réaliser facilement cette tâche. HttpService ne contient qu'une seule méthode SendHttpRequest. Cette méthode prend plusieurs paramètres :
-  - T (classe) => classe avec laquelle nous allons déserialiser le contenu de la réponse de la requète.
-  - url (string) => Une chaîne de charactères sur laquelle nous allons réaliser notre call Http.
-  - httpMethod (HttpMethod) => Un HttpMethod (Verbe Http (Get, Post, Delete, Put, Patch)), c'est le verbe Http que nous allons utiliser pour notre requète.
-  - body (object) => body est un object que nous allons serialiser puis ajouter dans le corps de notre méthode.
-  - bearer (string) => Une chaine de charactères contenant notre bearer token.
-
-Cette méthode nous retourne donc un objet HttpResult contenant plusieurs propriétés. Si lors de l'exécution de la méthode, celle ci à crash, on pourra retrouver le message d'erreur dans ErrorMessage. On retrouve le HttpStatusCode dans Status et toutes les informations de notre requète dans RequestMessage. Finalement nous pourront lire la réponse de notre requète dans Content.
-
-Vous pouvez utiliser la propriété BaseUrl pour définir un url qui sera appelé avant chaque call Http
-```C#
-IHttpService httpService = new HttpService();
-httpService.BaseUrl = "https://myApiLink/";
-```
+Ce service permet de réaliser des calls http sur une adresse donnée. On peut utiliser tous les verbes Http et utiliser un bearer token.
+Vous pouvez utiliser la propriété `BaseUrl` pour définir un url qui sera appelé avant chaque call Http.
 
 ### Utilisation
 ```C#
 IHttpService httpService = new HttpService(); // New instance of HttpService
+httpService.BaseUrl = "https://myApiBaseLink/";
 // Send post method without body recuperation
 HttpResult result = await httpService.SendHttpRequest(url, HttpMethod.Post, body); 
 
@@ -49,9 +34,11 @@ HttpResult result = await httpService.SendHttpRequest(url, HttpMethod.Post, body
 HttpResult<ColorDTODown> result = await httpService.SendHttpRequest<ColorDTODown>(url, HttpMethod.Get); 
 ```
 
+Cette méthode nous retourne un objet HttpResult contenant plusieurs propriétées. Si lors de l'exécution de la méthode, celle ci à crash, on pourra retrouver le message d'erreur dans ErrorMessage. On retrouve le HttpStatusCode dans Status et toutes les informations de notre requète dans RequestMessage. Finalement nous pourront lire la réponse de notre requète dans Content.
+
 ### Résultats
 
-Il y a **deux type de résultats** pour cette méthode, HttpResult et HttpResult<T>. HttpResult est construit de la manière suivante :
+Il y a **deux type de résultats** pour cette méthode, `HttpResult` et `HttpResult<T>`. HttpResult est construit de la manière suivante :
   
 ```C#
     public class HttpResult
@@ -62,7 +49,7 @@ Il y a **deux type de résultats** pour cette méthode, HttpResult et HttpResult
     }
 ```
 
-HttpResult<T> hérite de cette classe et possède uniquement une propriété en plus : Content
+HttpResult<T> hérite de cette classe et possède uniquement une propriété en plus : `Content`
   
 ```C#
     public class HttpResult<T>
