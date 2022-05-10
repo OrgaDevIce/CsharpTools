@@ -26,7 +26,7 @@
 
             var firstDayOfWeek = dateTime.AddDays(-1 * (dayNumber - 1));
 
-            return firstDayOfWeek;
+            return new DateTime(firstDayOfWeek.Year, firstDayOfWeek.Month, firstDayOfWeek.Day);
         }
 
         /// <summary>
