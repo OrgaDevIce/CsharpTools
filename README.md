@@ -3,7 +3,7 @@
 [![forthebadge](https://img.shields.io/nuget/v/ThomasBernard.CsharpTools)](https://www.nuget.org/packages/ThomasBernard.CsharpTools/)
 [![forthebadge](https://img.shields.io/nuget/dt/ThomasBernard.CsharpTools)](https://www.nuget.org/packages/ThomasBernard.CsharpTools/)
 [![forthebadge](https://img.shields.io/github/languages/code-size/DevIceCorp/CsharpTools)](https://www.nuget.org/packages/ThomasBernard.CsharpTools/)
-![Cirrus CI - Base Branch Build Status](https://img.shields.io/cirrus/github/DevIceCorp/CsharpTools)
+[![CI/CD-Package-CsharpTools](https://github.com/DevIceCorp/CsharpTools/actions/workflows/dotnet.yml/badge.svg)](https://github.com/DevIceCorp/CsharpTools/actions/workflows/dotnet.yml)
 
 
 [![forthebadge](https://forthebadge.com/images/badges/built-with-love.svg)](https://forthebadge.com)
