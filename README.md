@@ -12,9 +12,13 @@
 
 Ce projet à été mis en place afin de créer des composants C# réutilisables sur plusieurs projets.
 
-Voici une liste des différents services disponibles :
+Voici une liste des différentes fonctionnalitées disponibles :
   - HttpService
-  - CsvService
+  - LogService
+  - DateTimeExtension
+  - IntExtension
+  - StringExtension
+
 
 
 ## HttpService
