@@ -28,5 +28,15 @@
 
             return firstDayOfWeek;
         }
+
+        /// <summary>
+        /// Get the last day of the week of datetime (last day of the week => Sunday)
+        /// </summary>
+        /// <param name="dateTime">The current datetime which would the last day of the week</param>
+        /// <returns>The last day of the week</returns>
+        public static DateTime GetLastDayOfWeek(this DateTime dateTime)
+        {
+            return dateTime.GetFirstDayOfWeek().AddDays(6);
+        }
     }
 }
