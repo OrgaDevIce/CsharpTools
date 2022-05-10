@@ -16,6 +16,11 @@ namespace CsharpTools.Services
         {
             _httpClient = new HttpClient();
         }
+
+        public HttpService(string baseUrl):this()
+        {
+            BaseUrl = baseUrl;
+        }
         
         public async Task<HttpResult<T>> SendHttpRequest<T>(string url, HttpMethod httpMethod, object body = null, string bearer = "")
         {
