@@ -25,9 +25,7 @@ Vous pouvez utiliser la propriété `BaseUrl` pour définir un url qui sera appe
 
 ### Utilisation
 ```C#
-IHttpService httpService = new HttpService(); // New instance of HttpService
-httpService.BaseUrl = "https://myApiBaseLink/";
-// Send post method without body recuperation
+IHttpService httpService = new HttpService();
 HttpResult result = await httpService.SendHttpRequest(url, HttpMethod.Post, body); 
 
 // Send get method and get the content of the request
