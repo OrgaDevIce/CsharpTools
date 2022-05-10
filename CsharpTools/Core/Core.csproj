@@ -8,7 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="ThomasBernard.CsharpTools" Version="1.2.0" />
+    <PackageReference Include="ThomasBernard.CsharpTools" Version="1.3.3" />
   </ItemGroup>
 
   <ItemGroup>
