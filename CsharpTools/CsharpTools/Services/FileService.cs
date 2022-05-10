@@ -4,10 +4,15 @@ namespace CsharpTools.Services
 {
     public class FileService : IFileService
     {
+        public void AppendContent(string path, string content)
+        {
+            File.AppendAllText(path, content);
+        }
+
         public string CreateFile(string path, string name)
         {
             var stream = File.Create(path + "\\" + name);
-
+            stream.Close();
             return stream.Name;
         }
 

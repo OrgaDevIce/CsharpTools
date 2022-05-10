@@ -30,5 +30,7 @@
         /// <param name="path">The path of the file</param>
         /// <returns>True if success else false</returns>
         bool RemoveFile(string path);
+
+        void AppendContent(string path, string content);
     }
 }
