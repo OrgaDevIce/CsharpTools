@@ -1,6 +1,6 @@
 ﻿namespace CsharpTools.Extensions
 {
-    public partial class IntExtension
+    public static class IntExtension
     {
         private static readonly Random _random = new Random();
 
@@ -13,6 +13,11 @@
         public static int Random(int minValue, int maxValue)
         {
             return _random.Next(minValue, maxValue + 1);
+        }
+
+        public static bool IsNull(this int value)
+        {
+            return value == 0 || value == null;
         }
     }
 }
