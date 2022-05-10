@@ -62,35 +62,36 @@ HttpResult<T> hérite de cette classe et possède uniquement une propriété en 
 Dans ErrorMessage, on retrouvera le message de l'erreur qui aura été levée en cas de problème. Status contient le status http (404 NotFound...) et RequestMessage contiendra toutes les informations concerant notre requète. Si nous utilisons HttpResult<T> alors le résultat JSON de la requète sera stocké dans Content.
 
   
+  
+  
 ## LogService
 
-Toutes les applications devraient avoir des logs, cela permet d'identifier et de résoudre un problème plus rapidement. LogService permet de créer un fichier de log quotidien à l'emplacement souhaité par l'utilisateur. LogService contient deux méthodes et une propriété. La propriété DirectoryPath permet de choisir le chemin des logs. Par défaut ces logs sont créés à la racine de l'application. Ensuite pour écrire dans les fichiers de logs on utilise deux méthodes : 
+LogService permet de créer un fichier de log quotidien à l'emplacement souhaité par l'utilisateur (ou par défaut à la racine du dossier de build). LogService contient deux méthodes et une propriété. La propriété DirectoryPath permet de choisir le chemin des logs. Par défaut ces logs sont créés à la racine de l'application. Ensuite pour écrire dans les fichiers de logs on utilise deux méthodes : 
   - Info 
   - Error
   - (Des méthodes pourront être ajoutées dans les futures versions)
 
-Le fichier de log porte comme nom le schéma suivant : ```Logs_{Day}-{Month}.log ```
+Le fichier de log porte comme nom le schéma suivant : `Logs_{Day}-{Month}.log `
 
 Info prend un seul paramètre, le message à afficher dans le fichier de log.
 
-``` 09:48:58 | Info | MainPage.xaml.cs\OnCounterClicked (line n°33) | Button clicked ```
+` 09:48:58 | Info | MainPage.xaml.cs\OnCounterClicked (line n°33) | Button clicked `
 
 *Voici un exemple de ce qui est logué avec une Info.*
 
 Error prend en paramètre une Exception.
 
-``` 13:08:29 | Error | MainPage.xaml.cs\OnCounterClicked (line n°16) | This is an error ```
+` 13:08:29 | Error | MainPage.xaml.cs\OnCounterClicked (line n°16) | This is an error `
 
 *Voici un exemple de ce qui est logué avec une Error.*
 
 ### Utilisation
 
 ```C#
-ILogService logService = new LogService(); // New instance of our service
-logService.DirectoryPath = @"C:\logs"; // Set the path of logs folder
+ILogService logService = new LogService();
 
-logService.Info("Button clicked"); // Create a new Info
-logService.Error(new Exception("This is an error")); // Create a new Error
+logService.Info("Button clicked");
+logService.Error(new Exception("This is an error"));
 ```
 
 
