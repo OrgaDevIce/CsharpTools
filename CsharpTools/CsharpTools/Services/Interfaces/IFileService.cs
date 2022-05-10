@@ -23,6 +23,12 @@
         /// <param name="path">The full path of the file</param>
         /// <returns>The content of each line the file</returns>
         IEnumerable<string> ReadFile(string path);
+
+        /// <summary>
+        /// Delete a file
+        /// </summary>
+        /// <param name="path">The path of the file</param>
+        /// <returns>True if success else false</returns>
         bool RemoveFile(string path);
     }
 }
