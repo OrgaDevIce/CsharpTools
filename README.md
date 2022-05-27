@@ -117,9 +117,16 @@ logService.Error(new Exception("This is an error"));
   ```
   
   ### Int
+  
   Avec l'extension int on peut générer plus facilement un int aléatoire
   ```C#
   int intGenerated = IntExtension.Random(2, 75);
+  ```
+  
+  On peut facilement savoir si un int? est null ou égal à zéro grâce à la méthode IsNullOrZero
+  ```C#
+  int? intNumber = 24;
+  intNumber.IsNullOrZero();
   ```
   
   
