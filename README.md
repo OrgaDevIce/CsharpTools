@@ -99,7 +99,7 @@ logService.Error(new Exception("This is an error"));
   Avant toute chose il faut penser à importer CsharpTools.Models.Extensions avant d'utiliser toutes les méthodes d'extension.
   
   ```C#
-  using CsharpTools.Models.Extensions;
+  using CsharpTools.Extensions;
   ```
  
   ### String
@@ -118,6 +118,9 @@ logService.Error(new Exception("This is an error"));
   
   ### Int
   Avec l'extension int on peut générer plus facilement un int aléatoire
+  ```C#
+  int intGenerated = IntExtension.Random(2, 75);
+  ```
   
   
   
