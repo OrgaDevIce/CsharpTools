@@ -129,6 +129,12 @@ logService.Error(new Exception("This is an error"));
   intNumber.IsNullOrZero();
   ```
   
+  ### Datetime
+  IsBetween retourne true si la date est comprise entre les deux autres dates passées en paramètre.
+  
+  GetFirstDayOfWeek retourne le premier jour de la semaine d'une date donnée
+  
+  GetLastDayOfWeek retourne le dernier jour de la semaine d'une date donnée
   
   
 
