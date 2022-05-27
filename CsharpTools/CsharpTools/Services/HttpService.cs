@@ -4,86 +4,85 @@ using Newtonsoft.Json;
 using System.Net.Http.Headers;
 using System.Net.Http.Json;
 
-namespace CsharpTools.Services
+namespace CsharpTools.Services;
+
+public class HttpService : IHttpService
 {
-    public class HttpService : IHttpService
+    private readonly HttpClient _httpClient;
+
+    public string BaseUrl { get; set; }
+
+    public HttpService()
     {
-        private readonly HttpClient _httpClient;
+        _httpClient = new HttpClient();
+    }
 
-        public string BaseUrl { get; set; }
-
-        public HttpService()
-        {
-            _httpClient = new HttpClient();
-        }
-
-        public HttpService(string baseUrl):this()
-        {
-            BaseUrl = baseUrl;
-        }
+    public HttpService(string baseUrl):this()
+    {
+        BaseUrl = baseUrl;
+    }
         
-        public async Task<HttpResult<T>> SendHttpRequest<T>(string url, HttpMethod httpMethod, object body = null, string bearer = "")
+    public async Task<HttpResult<T>> SendHttpRequest<T>(string url, HttpMethod httpMethod, object body = null, string bearer = "")
+    {
+        var httpResult = new HttpResult<T>();
+
+        try
         {
-            var httpResult = new HttpResult<T>();
+            var response = await SendRequest(url, httpMethod, body, bearer);
 
-            try
-            {
-                var response = await SendRequest(url, httpMethod, body, bearer);
+            httpResult = new HttpResult<T>(response);
 
-                httpResult = new HttpResult<T>(response);
-
-                if (response.IsSuccessStatusCode)
-                    httpResult.Content = JsonConvert.DeserializeObject<T>(await response.Content.ReadAsStringAsync());
-            }
-            catch (Exception exception)
-            {
-                Console.WriteLine(exception);
-                httpResult.ErrorMessage = exception.Message;
-            }
-            return httpResult;
+            if (response.IsSuccessStatusCode)
+                httpResult.Content = JsonConvert.DeserializeObject<T>(await response.Content.ReadAsStringAsync());
         }
-
-        public async Task<HttpResult> SendHttpRequest(string url, HttpMethod httpMethod, object body = null, string bearer = "")
+        catch (Exception exception)
         {
-            var httpResult = new HttpResult();
+            Console.WriteLine(exception);
+            httpResult.ErrorMessage = exception.Message;
+        }
+        return httpResult;
+    }
 
-            try
-            {
-                var response = await SendRequest(url, httpMethod, body, bearer);
+    public async Task<HttpResult> SendHttpRequest(string url, HttpMethod httpMethod, object body = null, string bearer = "")
+    {
+        var httpResult = new HttpResult();
+
+        try
+        {
+            var response = await SendRequest(url, httpMethod, body, bearer);
                 
-                httpResult = new HttpResult(response);
-            }
-            catch (Exception exception)
-            {
-                Console.WriteLine(exception);
-                httpResult.ErrorMessage = exception.Message;
-            }
-            return httpResult;
+            httpResult = new HttpResult(response);
         }
-
-        private async Task<HttpResponseMessage> SendRequest(string url, HttpMethod httpMethod, object body = null, string bearer = "")
+        catch (Exception exception)
         {
-            try
-            {
-                if (!string.IsNullOrEmpty(bearer))
-                    _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", bearer);
+            Console.WriteLine(exception);
+            httpResult.ErrorMessage = exception.Message;
+        }
+        return httpResult;
+    }
 
-                // Set the httpMethod and the url
-                var httpRequestMessage = new HttpRequestMessage() { Method = httpMethod, RequestUri = new Uri($"{BaseUrl}{url}") };
+    private async Task<HttpResponseMessage> SendRequest(string url, HttpMethod httpMethod, object body = null, string bearer = "")
+    {
+        try
+        {
+            if (!string.IsNullOrEmpty(bearer))
+                _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", bearer);
 
-                // If the body is not null we add it in the request content
-                if (body != null)
-                    httpRequestMessage.Content = JsonContent.Create(body);
+            // Set the httpMethod and the url
+            var httpRequestMessage = new HttpRequestMessage() { Method = httpMethod, RequestUri = new Uri($"{BaseUrl}{url}") };
 
-                var response = await _httpClient.SendAsync(httpRequestMessage);
+            // If the body is not null we add it in the request content
+            if (body != null)
+                httpRequestMessage.Content = JsonContent.Create(body);
 
-                return response;
-            }
-            catch (Exception exception)
-            {
-                Console.WriteLine(exception);
-                return null;
-            }
+            var response = await _httpClient.SendAsync(httpRequestMessage);
+
+            return response;
+        }
+        catch (Exception exception)
+        {
+            Console.WriteLine(exception);
+            return null;
         }
     }
 }
