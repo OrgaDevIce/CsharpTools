@@ -94,7 +94,33 @@ logService.Info("Button clicked");
 logService.Error(new Exception("This is an error"));
 ```
 
-
+## Extensions
+  
+  Avant toute chose il faut penser à importer CsharpTools.Models.Extensions avant d'utiliser toutes les méthodes d'extension.
+  
+  ```C#
+  using CsharpTools.Models.Extensions;
+  ```
+ 
+  ### String
+  
+  Ajout de la méthode IsNullOrWhiteSpace à string qui est maintenant plus simple à utiliser que la méthode déjà existante.
+  ```C#
+  string helloWorld = "Hello world";
+  bool isNullOrWhiteSpace = helloWorld.IsNullOrWhiteSpace();
+  ```
+  
+  Ajout de la méthode ToInt à string qui permet de convertir un string vers un type int
+  ```C#
+  string Stringnumber = "214";
+  int intNumber = Stringnumber.ToInt();
+  ```
+  
+  ### Int
+  Avec l'extension int on peut générer plus facilement un int aléatoire
+  
+  
+  
 
 
 
