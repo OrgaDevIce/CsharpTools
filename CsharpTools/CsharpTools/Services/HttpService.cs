@@ -11,10 +11,18 @@ public class HttpService : IHttpService
     private readonly HttpClient _httpClient;
 
     public string BaseUrl { get; set; }
+    public bool ByPassCertificate { get; set; }
 
     public HttpService()
     {
-        _httpClient = new HttpClient();
+
+        var httpClientHandler = new HttpClientHandler();
+
+        if (ByPassCertificate)
+            httpClientHandler.ServerCertificateCustomValidationCallback = (message, certificate, chain, sslPolicyErrors) => true;
+
+        if (_httpClient == null)
+            _httpClient = new HttpClient(httpClientHandler);
     }
 
     public HttpService(string baseUrl):this()

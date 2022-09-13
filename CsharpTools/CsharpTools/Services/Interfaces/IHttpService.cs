@@ -29,4 +29,5 @@ public interface IHttpService
     /// Set the base url, this url will be added before each calls
     /// </summary>
     string BaseUrl { get; set; }
+    bool ByPassCertificate { get; set; }
 }

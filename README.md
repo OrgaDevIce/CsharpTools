@@ -34,6 +34,8 @@ HttpResult<ColorDTODown> result = await httpService.SendHttpRequest<ColorDTODown
 
 Cette méthode nous retourne un objet HttpResult contenant plusieurs propriétées. Si lors de l'exécution de la méthode, celle ci à crash, on pourra retrouver le message d'erreur dans ErrorMessage. On retrouve le HttpStatusCode dans Status et toutes les informations de notre requète dans RequestMessage. Finalement nous pourront lire la réponse de notre requète dans Content.
 
+Vous pouvez utiliser la propriété ByPassCertificate pour contourner la vérification des certificats.
+
 ### Résultats
 
 Il y a **deux type de résultats** pour cette méthode, `HttpResult` et `HttpResult<T>`. HttpResult est construit de la manière suivante :
