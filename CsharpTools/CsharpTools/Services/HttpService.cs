@@ -8,21 +8,34 @@ namespace CsharpTools.Services;
 
 public class HttpService : IHttpService
 {
-    private readonly HttpClient _httpClient;
+    private HttpClient _httpClient;
 
     public string BaseUrl { get; set; }
-    public bool ByPassCertificate { get; set; }
+
+    private bool _byPassCertificate;
+    public bool ByPassCertificate
+    {
+        get => _byPassCertificate;
+        set
+        {
+            if (value)
+            {
+                var httpClientHandler = new HttpClientHandler();
+                httpClientHandler.ServerCertificateCustomValidationCallback = (message, certificate, chain, sslPolicyErrors) => true;
+                _httpClient = new HttpClient(httpClientHandler);
+                _byPassCertificate = value;
+            }
+            else
+            {
+                _httpClient = new HttpClient();
+            }
+        }
+    }
 
     public HttpService()
     {
-
-        var httpClientHandler = new HttpClientHandler();
-
-        if (ByPassCertificate)
-            httpClientHandler.ServerCertificateCustomValidationCallback = (message, certificate, chain, sslPolicyErrors) => true;
-
         if (_httpClient == null)
-            _httpClient = new HttpClient(httpClientHandler);
+            _httpClient = new HttpClient();
     }
 
     public HttpService(string baseUrl):this()
